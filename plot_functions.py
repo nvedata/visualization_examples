@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+from matplotlib.patches import Circle
 
 def plot_mask(series, mask, neg_kw={}, pos_kw={}):
     
@@ -22,3 +23,29 @@ def plot_mask(series, mask, neg_kw={}, pos_kw={}):
     series[mask].reindex(index=series.index).plot(**pos_kw)
     plt.legend()
     plt.show()
+
+
+def plot_circles(ax, xs, ys, rs, **kwargs):
+    '''
+    Add circles to existing axes.
+    
+    Parameters
+    ----------
+    ax : matplotlib.axes.Axes
+    
+    xs : iterable
+    X coordinates of the circles centers.
+    
+    ys : iterable
+    Y coordinates of the circles centers.
+    
+    rs : iterable
+    Circles radiuses.
+    
+    Returns
+    -------
+    None
+    '''
+    for x, y, r in zip(xs, ys, rs):
+        c = Circle((x, y), r, **kwargs)
+        ax.add_patch(c)
